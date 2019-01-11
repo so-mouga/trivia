@@ -8,15 +8,20 @@ const apiAdorableAvatar = 'https://api.adorable.io/avatars/';
   providedIn: 'root'
 })
 export class UserService {
+  user: User;
 
   constructor(private storageService: StorageService) { }
 
-  saveUser(user: User): void {
-    this.storageService.set('user', user);
+  saveUser<T>(user: User): Promise<T> {
+    return this.storageService.set('user', user);
   }
 
   getUser<T>(): Promise<T> {
     return this.storageService.get('user');
+  }
+
+  deleteUser<T>(): Promise<T> {
+    return this.storageService.remove('user');
   }
 
   generateAvatar(sizeImage: string = '185'): string {

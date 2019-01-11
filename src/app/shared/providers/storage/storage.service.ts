@@ -16,4 +16,8 @@ export class StorageService {
   get<T>(key: string): Promise<T> {
     return this.storage.get(key);
   }
+
+  remove<T>(key: string): Promise<T> {
+    return this.storage.remove(key);
+  }
 }

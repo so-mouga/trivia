@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="toolbar">
+            <div class="toolbar-user">
+                <img *ngIf="user?.avatar" src="{{user.avatar}}" height="60"/>
+                <p *ngIf="user?.nickname">{{user.nickname}}</p>
+            </div>
+            <ion-button (click)="logout()">exit</ion-button>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+</ion-content>
