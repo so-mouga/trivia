@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import User from '../user.interface';
+import {UserService} from '../../shared/providers/user/user.service';
 
 const apiAdorableAvatar = 'https://api.adorable.io/avatars/';
 
@@ -15,30 +16,20 @@ export class LoginPage implements OnInit {
     avatar: null
   };
 
-  constructor() { }
+  constructor(private userProvider: UserService) {}
 
   ngOnInit() {
   }
 
-  createUser() {
+  generateUser(): void {
     if (null !== this.user.nickname) {
-      this.user.avatar = this.generateAvatar();
+        this.user.avatar = this.userProvider.generateAvatar();
     }
   }
 
-  startGame() {
-    console.log('toto');
-  }
-
-  private generateAvatar(size: string = '185'): string {
-    const anysize = 3;
-    const charset = 'abcdefghijklmnopqrstuvwxyz';
-    let result = '';
-    for (let i = 0; i < anysize; i++ ) {
-      result += charset[Math.floor(Math.random() * charset.length)];
+  public startGame(): void {
+    if (null !== this.user.nickname && null !== this.user.avatar) {
+      this.userProvider.saveUser(this.user);
     }
-
-    return `${apiAdorableAvatar}${size}/${result}.png`;
   }
-
 }

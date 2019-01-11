@@ -6,6 +6,6 @@
         <ion-label>nickname</ion-label>
         <ion-input [(ngModel)]="user.nickname"  type="text"></ion-input>
     </ion-item>
-    <ion-button (click)="createUser()">create</ion-button>
+    <ion-button (click)="generateUser()">create</ion-button>
     <ion-button *ngIf="user.avatar && user.nickname" (click)="startGame()">PLAY</ion-button>
 </ion-content>
