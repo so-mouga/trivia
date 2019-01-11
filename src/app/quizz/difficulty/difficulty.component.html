@@ -1,0 +1,14 @@
+<p>Choice your difficulty</p>
+<ion-grid>
+    <ion-row *ngFor="let difficulty of difficulties">
+        <ion-col>
+            <ion-button
+                color="{{difficulty.color}}"
+                style="width: 100%"
+                (click)="onSelectDifficulty(difficulty)"
+            >
+                {{difficulty.name|uppercase}}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
