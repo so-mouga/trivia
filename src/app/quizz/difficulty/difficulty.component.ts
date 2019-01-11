@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import Difficulty from './difficulty.interface';
 
 const difficulties: Difficulty[] = [
@@ -26,8 +26,9 @@ const difficulties: Difficulty[] = [
 })
 export class DifficultyComponent implements OnInit {
     difficulties: Difficulty[];
+    @Output() difficultyChosen = new EventEmitter();
 
-  constructor() {
+    constructor() {
     this.difficulties = difficulties;
   }
 
@@ -41,9 +42,6 @@ export class DifficultyComponent implements OnInit {
   }
 
   onSelectDifficulty(difficulty: Difficulty) {
-      console.log(difficulty);
+    this.difficultyChosen.emit(difficulty);
   }
-
-
-
 }

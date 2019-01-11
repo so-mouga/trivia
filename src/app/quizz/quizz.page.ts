@@ -3,6 +3,7 @@ import {UserService} from '../shared/providers/user/user.service';
 import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import User from '../user/user.interface';
+import Difficulty from './difficulty/difficulty.interface';
 
 
 @Component({
@@ -13,6 +14,7 @@ import User from '../user/user.interface';
 export class QuizzPage implements OnInit {
 
   user: User;
+  difficulty: Difficulty = null;
   constructor(private userProvider: UserService, private router: Router, private alertCtrl: AlertController) {
     this.userProvider.getUser<User>().then((user) => {
         if (null === user) {
@@ -22,6 +24,10 @@ export class QuizzPage implements OnInit {
     });
   }
   ngOnInit() {
+  }
+
+  difficultyChosen(difficulty: Difficulty) {
+    this.difficulty = difficulty;
   }
 
   logout() {

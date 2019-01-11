@@ -11,5 +11,11 @@
 </ion-header>
 
 <ion-content>
-    <app-difficulty class="bloc-quizz"></app-difficulty>
+    <app-difficulty
+        *ngIf="!difficulty"
+        class="bloc-quizz"
+        (difficultyChosen)="difficultyChosen($event)"
+    >
+    </app-difficulty>
+    <p *ngIf="difficulty">mode: {{difficulty.name}}</p>
 </ion-content>
