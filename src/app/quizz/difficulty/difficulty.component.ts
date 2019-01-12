@@ -25,10 +25,10 @@ const difficulties: Difficulty[] = [
   styleUrls: ['./difficulty.component.scss']
 })
 export class DifficultyComponent implements OnInit {
-    difficulties: Difficulty[];
-    @Output() difficultyChosen = new EventEmitter();
+  difficulties: Difficulty[];
+  @Output() difficultyChosen = new EventEmitter();
 
-    constructor() {
+  constructor() {
     this.difficulties = difficulties;
   }
 

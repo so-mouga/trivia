@@ -17,5 +17,14 @@
         (difficultyChosen)="difficultyChosen($event)"
     >
     </app-difficulty>
-    <p *ngIf="difficulty">mode: {{difficulty.name}}</p>
+
+    <div *ngIf="difficulty">
+        <p>level: {{difficulty.name}}</p>
+        <!--<app-question></app-question>-->
+    </div>
+
+
+
+
+    <app-question></app-question>
 </ion-content>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { QuizzPage } from './quizz.page';
 import { DifficultyComponent } from './difficulty/difficulty.component';
+import { QuestionComponent } from './question/question.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [QuizzPage, DifficultyComponent]
+  declarations: [QuizzPage, DifficultyComponent, QuestionComponent]
 })
 export class QuizzPageModule {}
