@@ -13,6 +13,7 @@ import Difficulty from '../difficulty/difficulty.interface';
 export class QuestionComponent implements OnInit {
   questions: Array<Question>;
   currentQuestion: Question;
+  countAllQuestions: number;
   @Input() difficulty: Difficulty;
 
   constructor(private opentdb: OpentdbService) {
@@ -21,6 +22,7 @@ export class QuestionComponent implements OnInit {
       .getQuestions<QuestionOpentdbInterface>()
       .subscribe((data) => {
         this.questions = data.results;
+        this.countAllQuestions = this.questions.length;
         this.nextQuestion();
     });
   }
