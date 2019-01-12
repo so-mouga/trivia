@@ -1,21 +1,21 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import Difficulty from './difficulty.interface';
 
-const difficulties: Difficulty[] = [
+export const difficulties: Difficulty[] = [
   {
     name: 'easy',
     points: 5,
-    color: 'secondary'
+    colorBtn: 'secondary',
   },
   {
     name: 'medium',
     points: 10,
-    color: ''
+    colorBtn: '',
   },
   {
     name: 'hard',
     points: 20,
-    color: 'danger'
+    colorBtn: 'danger',
   },
 ];
 

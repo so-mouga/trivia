@@ -20,11 +20,6 @@
 
     <div *ngIf="difficulty">
         <p>level: {{difficulty.name}}</p>
-        <!--<app-question></app-question>-->
+        <app-question [difficulty]="difficulty" ></app-question>
     </div>
-
-
-
-
-    <app-question></app-question>
 </ion-content>

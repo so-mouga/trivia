@@ -15,6 +15,7 @@ export class QuizzPage implements OnInit {
 
   user: User;
   difficulty: Difficulty = null;
+
   constructor(private userProvider: UserService, private router: Router, private alertCtrl: AlertController) {
     this.userProvider.getUser<User>().then((user) => {
         if (null === user) {

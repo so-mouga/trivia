@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {OpentdbService} from '../../shared/clients/opentdb/opentdb.service';
-import {QuestionOpentdbInterface, Question} from '../../shared/clients/opentdb/questionOpentdb.interface';
+import {QuestionOpentdbInterface} from '../../shared/clients/opentdb/questionOpentdb.interface';
+import {Question} from '../../shared/class/question';
+import {difficulties} from '../difficulty/difficulty.component';
+import Difficulty from '../difficulty/difficulty.interface';
 
 @Component({
   selector: 'app-question',
@@ -10,7 +13,7 @@ import {QuestionOpentdbInterface, Question} from '../../shared/clients/opentdb/q
 export class QuestionComponent implements OnInit {
   questions: Array<Question>;
   currentQuestion: Question;
-  currentRandomAnswers: Array<string>;
+  @Input() difficulty: Difficulty;
 
   constructor(private opentdb: OpentdbService) {
     this
@@ -19,21 +22,27 @@ export class QuestionComponent implements OnInit {
       .subscribe((data) => {
         this.questions = data.results;
         this.nextQuestion();
-        // this.currentQuestion = this.questions.shift();
     });
   }
 
   ngOnInit() {
+      console.log(this.difficulty);
   }
 
   nextQuestion() {
     this.currentQuestion = this.questions.shift();
+    this.generateRandomAnswers();
+  }
 
-    this.currentRandomAnswers = this.currentQuestion.incorrect_answers;
-    this.currentRandomAnswers.push(this.currentQuestion.correct_answer);
-    console.log(this.currentRandomAnswers);
-      console.log(this.currentQuestion.correct_answer);
-      console.log(this.currentQuestion.incorrect_answers);
+  answerUser(answer: String) {
+    console.log(answer);
+    this.nextQuestion();
+  }
+
+  generateRandomAnswers() {
+    this.currentQuestion.all_answers = this.currentQuestion.incorrect_answers;
+    this.currentQuestion.all_answers.push(this.currentQuestion.correct_answer);
+    this.shuffle(this.currentQuestion.all_answers);
   }
 
   shuffle(a) {

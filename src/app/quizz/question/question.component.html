@@ -1,15 +1,16 @@
 
 <ion-grid *ngIf="currentQuestion?.question">
     <p>{{currentQuestion.question}}</p>
-    <ion-row *ngFor="let answer of currentQuestion.incorrect_answers">
+    <ion-row *ngFor="let answer of currentQuestion.all_answers">
         <ion-col>
             <ion-button
                     color="light"
                     style="width: 100%"
-                    (click)="nextQuestion(currentQuestion.correct_answer)"
+                    (click)="answerUser(answer)"
             >
                 {{answer|uppercase}}
             </ion-button>
         </ion-col>
     </ion-row>
 </ion-grid>
+<!--(click)="nextQuestion(currentQuestion.correct_answer)"-->
