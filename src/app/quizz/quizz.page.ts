@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AlertController} from '@ionic/angular';
 import User from '../user/user.interface';
 import Difficulty from './difficulty/difficulty.interface';
+import Quizz from '../shared/class/quizz';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class QuizzPage implements OnInit {
 
   user: User;
   difficulty: Difficulty = null;
+  quizzPartie = new Quizz();
 
   constructor(private userProvider: UserService, private router: Router, private alertCtrl: AlertController) {
     this.userProvider.getUser<User>().then((user) => {
@@ -22,8 +24,11 @@ export class QuizzPage implements OnInit {
             router.navigate(['/home']);
         }
         this.user = user;
+        this.quizzPartie.avatar = this.user.avatar;
+        this.quizzPartie.nickname = this.user.nickname;
     });
   }
+
   ngOnInit() {
   }
 

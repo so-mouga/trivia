@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {OpentdbService} from '../../shared/clients/opentdb/opentdb.service';
 import {QuestionOpentdbInterface} from '../../shared/clients/opentdb/questionOpentdb.interface';
 import {Question} from '../../shared/class/question';
-import {difficulties} from '../difficulty/difficulty.component';
 import Difficulty from '../difficulty/difficulty.interface';
+import Quizz from '../../shared/class/quizz';
 
 @Component({
   selector: 'app-question',
@@ -15,6 +15,7 @@ export class QuestionComponent implements OnInit {
   currentQuestion: Question;
   countAllQuestions: number;
   @Input() difficulty: Difficulty;
+  @Input() quizzPartie: Quizz;
 
   constructor(private opentdb: OpentdbService) {
     this
@@ -28,7 +29,6 @@ export class QuestionComponent implements OnInit {
   }
 
   ngOnInit() {
-      console.log(this.difficulty);
   }
 
   nextQuestion() {
@@ -36,9 +36,18 @@ export class QuestionComponent implements OnInit {
     this.generateRandomAnswers();
   }
 
-  answerUser(answer: String) {
-    console.log(answer);
+  answerUser(answer: string) {
+    this.addOrRemovePoint(answer);
+    console.log(this.quizzPartie.score);
     this.nextQuestion();
+  }
+
+  addOrRemovePoint(answer: string): void {
+    if (answer === this.currentQuestion.correct_answer) {
+      this.quizzPartie.score += this.difficulty.points;
+      return;
+    }
+    this.quizzPartie.score -= this.difficulty.points;
   }
 
   generateRandomAnswers() {
