@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {OpentdbService} from '../../shared/clients/opentdb/opentdb.service';
 import {QuestionOpentdbInterface} from '../../shared/clients/opentdb/questionOpentdb.interface';
 import {Question} from '../../shared/class/question';
@@ -14,8 +14,10 @@ export class QuestionComponent implements OnInit {
   questions: Array<Question>;
   currentQuestion: Question;
   countAllQuestions: number;
+
   @Input() difficulty: Difficulty;
   @Input() quizzPartie: Quizz;
+  @Output() quizzPartieFinished = new EventEmitter();
 
   constructor(private opentdb: OpentdbService) {
     this
@@ -33,6 +35,10 @@ export class QuestionComponent implements OnInit {
 
   nextQuestion() {
     this.currentQuestion = this.questions.shift();
+    if (this.currentQuestion === undefined) {
+        this.quizzPartieFinished.emit(true);
+        return;
+    }
     this.generateRandomAnswers();
   }
 

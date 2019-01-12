@@ -17,6 +17,7 @@ export class QuizzPage implements OnInit {
   user: User;
   difficulty: Difficulty = null;
   quizzPartie = new Quizz();
+  partieFinished = false;
 
   constructor(private userProvider: UserService, private router: Router, private alertCtrl: AlertController) {
     this.userProvider.getUser<User>().then((user) => {
@@ -27,6 +28,7 @@ export class QuizzPage implements OnInit {
         this.quizzPartie.avatar = this.user.avatar;
         this.quizzPartie.nickname = this.user.nickname;
     });
+    console.log(this.partieFinished);
   }
 
   ngOnInit() {
@@ -34,6 +36,10 @@ export class QuizzPage implements OnInit {
 
   difficultyChosen(difficulty: Difficulty) {
     this.difficulty = difficulty;
+  }
+
+  quizzPartieFinished(isFinished: boolean) {
+    this.partieFinished = isFinished;
   }
 
   logout() {
