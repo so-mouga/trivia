@@ -12,7 +12,8 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule'
   },
   { path: 'login', loadChildren: './user/login/login.module#LoginPageModule' },
-  { path: 'quizz', loadChildren: './quizz/quizz.module#QuizzPageModule' }
+  { path: 'quizz', loadChildren: './quizz/quizz.module#QuizzPageModule' },
+  { path: 'board', loadChildren: './board/board.module#BoardPageModule' }
 ];
 
 @NgModule({

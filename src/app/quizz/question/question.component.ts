@@ -4,6 +4,7 @@ import {QuestionOpentdbInterface} from '../../shared/clients/opentdb/questionOpe
 import {Question} from '../../shared/class/question';
 import Difficulty from '../difficulty/difficulty.interface';
 import Quizz from '../../shared/class/quizz';
+import {QuizzService} from '../../shared/providers/quizz/quizz.service';
 
 @Component({
   selector: 'app-question',
@@ -14,18 +15,21 @@ export class QuestionComponent implements OnInit {
   questions: Array<Question>;
   currentQuestion: Question;
   countAllQuestions: number;
+  quizzStartedAt: Date;
+  quizzFinishedAt: Date;
 
   @Input() difficulty: Difficulty;
   @Input() quizzPartie: Quizz;
   @Output() quizzPartieFinished = new EventEmitter();
 
-  constructor(private opentdb: OpentdbService) {
+  constructor(private quizzService: QuizzService) {
     this
-      .opentdb
-      .getQuestions<QuestionOpentdbInterface>()
+      .quizzService
+      .getQuestions()
       .subscribe((data) => {
         this.questions = data.results;
         this.countAllQuestions = this.questions.length;
+        this.quizzStartedAt = new Date();
         this.nextQuestion();
     });
   }
@@ -36,10 +40,17 @@ export class QuestionComponent implements OnInit {
   nextQuestion() {
     this.currentQuestion = this.questions.shift();
     if (this.currentQuestion === undefined) {
+        this.calculeTimeQuizz();
         this.quizzPartieFinished.emit(true);
         return;
     }
     this.generateRandomAnswers();
+  }
+
+  calculeTimeQuizz() {
+    this.quizzFinishedAt = new Date();
+    const duration = this.quizzFinishedAt.getTime() - this.quizzStartedAt.getTime();
+    this.quizzPartie.time = Math.round(duration / 1000);
   }
 
   answerUser(answer: string) {

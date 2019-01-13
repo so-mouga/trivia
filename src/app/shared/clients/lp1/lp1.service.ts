@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpService} from '../../providers/http/http.service';
 import Quizz from '../../class/quizz';
 import {Lp1Interface} from './lp1.interface';
+import {Observable} from 'rxjs';
 
 const urlAPI = 'https://leaderboard.lp1.eu';
 
@@ -22,4 +23,7 @@ export class Lp1Service {
       return this.httpService.post<any>(`${urlAPI}/api/score`, lp1Interface).toPromise();
   }
 
+  getScoresUsers(): Observable<Array<Lp1Interface>> {
+    return this.httpService.get<any>(`${urlAPI}/api/json`);
+  }
 }

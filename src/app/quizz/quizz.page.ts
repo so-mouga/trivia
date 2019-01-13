@@ -58,13 +58,14 @@ export class QuizzPage implements OnInit {
                       {
                           text: 'Exit',
                           handler: () => {
+                              location.reload();
                               this.navController.navigateRoot(['/home']);
                           }
                       },
                       {
                           text: 'Look the dashboard',
                           handler: () => {
-                              console.log('okok');
+                              this.navController.navigateRoot(['/board']);
                           }
                       }
                   ]
@@ -81,7 +82,8 @@ export class QuizzPage implements OnInit {
           text: 'Exit',
           role: 'exit',
           handler: () => {
-            this.navController.navigateRoot(['/home']);
+              location.reload();
+              this.navController.navigateRoot(['/home']);
           }
         },
         {

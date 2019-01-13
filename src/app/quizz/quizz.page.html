@@ -27,8 +27,9 @@
     </div>
 
     <div *ngIf="partieFinished" class="bloc-quizz">
-       <p>the game is finished your score is:</p>
-       <p>{{quizzPartie.score}}</p>
+       <p>the game is finished</p>
+       <p>your score: {{quizzPartie.score}}</p>
+       <p>duration: {{quizzPartie.time}} secondes</p>
         <div class="button-finished-game">
             <ion-button (click)="shareQuizz()">share your score</ion-button>
             <ion-button (click)="quitQuizz()">quit</ion-button>

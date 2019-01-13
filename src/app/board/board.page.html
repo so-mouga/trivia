@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-button (click)="home()">home</ion-button>
+      <ion-title>board</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="users">
+    <ion-list>
+        <ion-list-header>
+            score users
+        </ion-list-header>
+        <ion-item *ngFor="let user of users">
+            <ion-label>{{user.nickname}}</ion-label>
+            <ion-label *ngIf="user.avatar_url" ><img [src]="user.avatar_url" height="45"></ion-label>
+            <ion-label>
+                <p>score: {{user.score}}</p>
+                <p>time: {{user.time}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

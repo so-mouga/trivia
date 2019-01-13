@@ -12,6 +12,7 @@ export class HomePage {
     user: User;
 
     constructor(private router: Router, private userService: UserService) {
+        console.log('toto');
       userService
         .getUser<User>()
         .then((user) => this.user = user);
@@ -29,5 +30,9 @@ export class HomePage {
         return;
       }
       this.router.navigate(['/login']);
+    }
+
+    dashboard() {
+      this.router.navigate(['/board']);
     }
 }
