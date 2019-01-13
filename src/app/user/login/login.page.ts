@@ -18,12 +18,15 @@ export class LoginPage implements OnInit {
   };
 
   constructor(private userProvider: UserService, private router: Router) {
-    this.userProvider.getUser()
-    .then((user) => {
-      if (null !== user) {
-        this.router.navigate(['/quizz']);
-      }
-    });
+    this
+      .userProvider
+      .getUser()
+      .subscribe((user) => {
+        if (null !== user) {
+          this.router.navigate(['/quizz']);
+        }
+      })
+    ;
   }
 
   ngOnInit() {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import User from '../../../user/user.interface';
 import {StorageService} from '../storage/storage.service';
+import {Observable, Subject} from 'rxjs';
 
 const apiAdorableAvatar = 'https://api.adorable.io/avatars/';
 
@@ -8,19 +9,30 @@ const apiAdorableAvatar = 'https://api.adorable.io/avatars/';
   providedIn: 'root'
 })
 export class UserService {
-  user: User;
+  userSubject: Subject<User> = new Subject<User>();
 
   constructor(private storageService: StorageService) { }
 
   saveUser<T>(user: User): Promise<T> {
+    this.userSubject.next(user);
     return this.storageService.set('user', user);
   }
 
-  getUser<T>(): Promise<T> {
-    return this.storageService.get('user');
+  loadUser() {
+    this
+      .storageService
+      .get('user')
+      .then((user: User) => this.userSubject.next(user));
   }
 
-  deleteUser<T>(): Promise<T> {
+  getUser(): Observable<User> {
+    this.loadUser();
+    return this.userSubject.asObservable();
+  }
+
+
+  deleteUser(): Promise<any> {
+    this.userSubject.next(null);
     return this.storageService.remove('user');
   }
 

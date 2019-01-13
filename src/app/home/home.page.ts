@@ -12,10 +12,11 @@ export class HomePage {
     user: User;
 
     constructor(private router: Router, private userService: UserService) {
-        console.log('toto');
-      userService
-        .getUser<User>()
-        .then((user) => this.user = user);
+        this.userService
+            .getUser()
+            .subscribe(user => {
+                this.user = user;
+            });
     }
 
     deleteUser() {

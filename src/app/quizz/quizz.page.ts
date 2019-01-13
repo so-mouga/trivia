@@ -23,7 +23,7 @@ export class QuizzPage implements OnInit {
               private alertCtrl: AlertController,
               private navController: NavController,
               private quizzService: QuizzService) {
-    this.userProvider.getUser<User>().then((user) => {
+    this.userProvider.getUser().subscribe((user) => {
         if (null === user) {
             this.navController.navigateRoot(['/home']);
         }
@@ -58,7 +58,6 @@ export class QuizzPage implements OnInit {
                       {
                           text: 'Exit',
                           handler: () => {
-                              location.reload();
                               this.navController.navigateRoot(['/home']);
                           }
                       },
@@ -82,7 +81,6 @@ export class QuizzPage implements OnInit {
           text: 'Exit',
           role: 'exit',
           handler: () => {
-              location.reload();
               this.navController.navigateRoot(['/home']);
           }
         },
