@@ -44,7 +44,6 @@ export class QuestionComponent implements OnInit {
 
   answerUser(answer: string) {
     this.addOrRemovePoint(answer);
-    console.log(this.quizzPartie.score);
     this.nextQuestion();
   }
 

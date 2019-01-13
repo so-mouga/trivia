@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../shared/providers/user/user.service';
-import {Router} from '@angular/router';
-import {AlertController} from '@ionic/angular';
+import {AlertController, NavController} from '@ionic/angular';
 import User from '../user/user.interface';
 import Difficulty from './difficulty/difficulty.interface';
 import Quizz from '../shared/class/quizz';
@@ -19,16 +18,15 @@ export class QuizzPage implements OnInit {
   quizzPartie = new Quizz();
   partieFinished = false;
 
-  constructor(private userProvider: UserService, private router: Router, private alertCtrl: AlertController) {
+  constructor(private userProvider: UserService, private alertCtrl: AlertController, private navController: NavController) {
     this.userProvider.getUser<User>().then((user) => {
         if (null === user) {
-            router.navigate(['/home']);
+            this.navController.navigateRoot(['/home']);
         }
         this.user = user;
         this.quizzPartie.avatar = this.user.avatar;
         this.quizzPartie.nickname = this.user.nickname;
     });
-    console.log(this.partieFinished);
   }
 
   ngOnInit() {
@@ -42,6 +40,11 @@ export class QuizzPage implements OnInit {
     this.partieFinished = isFinished;
   }
 
+  quitQuizz() {
+    this.navController.navigateRoot(['/home']);
+    // location.reload();
+  }
+
   logout() {
     const alert = this.alertCtrl.create({
       message: 'Do you want to exit the game?',
@@ -50,13 +53,11 @@ export class QuizzPage implements OnInit {
           text: 'Exit',
           role: 'exit',
           handler: () => {
-            this.userProvider.deleteUser().then(() => this.router.navigate(['/home']));
+            this.navController.navigateRoot(['/home']);
           }
         },
         {
-          text: 'continue',
-          handler: () => {
-          }
+          text: 'continue'
         }
       ]
     });

@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>-->
 
-<ion-content padding class="test">
+<ion-content padding class="test cards-bg">
     <ion-content>
         <ion-grid>
             <ion-row justify-content-center align-items-center>
@@ -19,6 +19,21 @@
                 <ion-button (click)="startGame()">start the game</ion-button>
             </ion-row>
         </ion-grid>
+
+        <ion-content class="cards-bg"  *ngIf="user">
+            <ion-card *ngIf="user">
+                <ion-row no-padding>
+                    <ion-col>
+                        <ion-card-title>
+                            {{user.nickname}}
+                        </ion-card-title>
+                    </ion-col>
+                    <ion-col text-right>
+                        <ion-button (click)="deleteUser()" color="danger" size="small">delete</ion-button>
+                    </ion-col>
+                </ion-row>
+                <img src={{user.avatar}}>
+            </ion-card>
+        </ion-content>
     </ion-content>
-    <!--<ion-button (click)="startGame()">Send</ion-button>-->
 </ion-content>
