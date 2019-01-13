@@ -12,8 +12,12 @@ export class HomePage {
     user: User;
     constructor(private router: Router, private userService: UserService) {
       this.userService
-        .getUser()
-        .subscribe(user => this.user = user);
+        .getUserObservable()
+        .subscribe((user) => {
+          if (null !== user) {
+            this.user = user;
+          }
+        });
     }
 
     deleteUser() {
@@ -27,11 +31,11 @@ export class HomePage {
     }
 
     startGame() {
-      if (null !== this.user) {
-        this.router.navigate(['/quizz']);
+      if (null === this.user || undefined === this.user) {
+        this.router.navigate(['/login']);
         return;
       }
-      this.router.navigate(['/login']);
+      this.router.navigate(['/quizz']);
     }
 
     dashboard() {

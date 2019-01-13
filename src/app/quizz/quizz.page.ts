@@ -23,14 +23,15 @@ export class QuizzPage implements OnInit {
               private alertCtrl: AlertController,
               private navController: NavController,
               private quizzService: QuizzService) {
-    this.userProvider.getUser().subscribe((user) => {
+    this.userProvider.getUser().then((user) => {
         if (null === user) {
             this.navController.navigateRoot(['/home']);
+        } else {
+          this.user = user;
+          // create quizzPartie to send to api
+          this.quizzPartie.avatar_url = this.user.avatar_url;
+          this.quizzPartie.nickname = this.user.nickname;
         }
-        this.user = user;
-        // create quizzPartie to send to api
-        this.quizzPartie.avatar_url = this.user.avatar_url;
-        this.quizzPartie.nickname = this.user.nickname;
     });
   }
 

@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     this
       .userProvider
       .getUser()
-      .subscribe((user) => {
+      .then((user) => {
         if (null !== user) {
           this.router.navigate(['/quizz']);
         }

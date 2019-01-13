@@ -18,18 +18,16 @@ export class UserService {
     return this.storageService.set('user', user);
   }
 
-  loadUser() {
+  getUserObservable(): Observable<User> {
     this
-      .storageService
-      .get('user')
+      .getUser()
       .then((user: User) => this.userSubject.next(user))
-      .catch(error => console.error(error))
-    ;
+      .catch(error => console.error(error));
+    return this.userSubject.asObservable();
   }
 
-  getUser(): Observable<User> {
-    this.loadUser();
-    return this.userSubject.asObservable();
+  getUser(): Promise<User> {
+    return this.storageService.get('user');
   }
 
 
