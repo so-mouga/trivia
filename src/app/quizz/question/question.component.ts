@@ -40,14 +40,14 @@ export class QuestionComponent implements OnInit {
   nextQuestion() {
     this.currentQuestion = this.questions.shift(); // generate one question one by page
     if (this.currentQuestion === undefined) {
-        this.calculeTimeQuizz();
+        this.calculeDurationTimeQuizz();
         this.quizzPartieFinished.emit(true);
         return;
     }
     this.generateRandomAnswers();
   }
 
-  calculeTimeQuizz() {
+  calculeDurationTimeQuizz() {
     this.quizzFinishedAt = new Date();
     const duration = this.quizzFinishedAt.getTime() - this.quizzStartedAt.getTime();
     this.quizzPartie.time = Math.round(duration / 1000);
@@ -77,6 +77,5 @@ export class QuestionComponent implements OnInit {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
-    return a;
   }
 }
