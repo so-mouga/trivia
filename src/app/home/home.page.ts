@@ -10,18 +10,19 @@ import User from '../user/user.interface';
 })
 export class HomePage {
     user: User;
-
     constructor(private router: Router, private userService: UserService) {
-        this.userService
-            .getUser()
-            .subscribe(user => {
-                this.user = user;
-            });
+      this.userService
+        .getUser()
+        .subscribe(user => this.user = user);
     }
 
     deleteUser() {
       if (null !== this.user) {
-        this.userService.deleteUser().then(() => this.user = null);
+        this
+          .userService
+          .deleteUser()
+          .then(() => this.user = null)
+          .catch(error => console.error(error));
       }
     }
 

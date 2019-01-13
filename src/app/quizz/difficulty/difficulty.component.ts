@@ -35,12 +35,6 @@ export class DifficultyComponent implements OnInit {
   ngOnInit() {
   }
 
-  getNameDifficulties() {
-    return difficulties.map((difficulty) => {
-        return difficulty.name;
-    });
-  }
-
   onSelectDifficulty(difficulty: Difficulty) {
     this.difficultyChosen.emit(difficulty);
   }

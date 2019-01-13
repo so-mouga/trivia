@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from '../../providers/http/http.service';
 import {Observable} from 'rxjs';
+import {QuestionOpentdbInterface} from './questionOpentdb.interface';
 
 const urlAPI = 'https://opentdb.com/api.php';
 
@@ -11,10 +12,10 @@ export class OpentdbService {
 
   constructor(private httpService: HttpService) { }
 
-  getQuestions<T>(amout: string = '1', difficulty: string = 'easy', category: string = ''): Observable<T> {
+  getQuestions(amout: string = '1', difficulty: string = 'easy', category: string = ''): Observable<QuestionOpentdbInterface> {
       return this
           .httpService
-          .get<any>(`${urlAPI}?amount=${amout}&difficulty=${difficulty}&category=${category}`)
+          .get<QuestionOpentdbInterface>(`${urlAPI}?amount=${amout}&difficulty=${difficulty}&category=${category}`)
       ;
   }
 }

@@ -21,7 +21,7 @@
             </ion-row>
         </ion-grid>
 
-        <ion-content class="cards-bg"  *ngIf="user">
+        <ion-content class="cards-bg"  *ngIf="user?.avatar_url && user?.nickname">
             <ion-card *ngIf="user">
                 <ion-row no-padding>
                     <ion-col>

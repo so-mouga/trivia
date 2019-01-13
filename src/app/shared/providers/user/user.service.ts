@@ -22,7 +22,9 @@ export class UserService {
     this
       .storageService
       .get('user')
-      .then((user: User) => this.userSubject.next(user));
+      .then((user: User) => this.userSubject.next(user))
+      .catch(error => console.error(error))
+    ;
   }
 
   getUser(): Observable<User> {

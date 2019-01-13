@@ -28,6 +28,7 @@ export class QuizzPage implements OnInit {
             this.navController.navigateRoot(['/home']);
         }
         this.user = user;
+        // create quizzPartie to send to api
         this.quizzPartie.avatar_url = this.user.avatar_url;
         this.quizzPartie.nickname = this.user.nickname;
     });

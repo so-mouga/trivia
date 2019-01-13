@@ -23,6 +23,6 @@ export class QuizzService {
 
   getQuestions(): Observable<QuestionOpentdbInterface> {
     return this
-      .opentdb.getQuestions<QuestionOpentdbInterface>();
+      .opentdb.getQuestions();
   }
 }

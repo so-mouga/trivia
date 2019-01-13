@@ -11,9 +11,10 @@ import {Router} from '@angular/router';
 export class BoardPage implements OnInit {
   users: Lp1Interface[];
   constructor(private quizzService: QuizzService, private router: Router) {
-      this.quizzService.getScoresUsers().subscribe((users) => {
-          this.users = users;
-      });
+    this
+      .quizzService
+      .getScoresUsers()
+      .subscribe((users) => this.users = users);
   }
 
   ngOnInit() {
@@ -22,5 +23,4 @@ export class BoardPage implements OnInit {
   home() {
     this.router.navigate(['/home']);
   }
-
 }

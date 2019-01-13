@@ -28,7 +28,7 @@ export class QuestionComponent implements OnInit {
       .getQuestions()
       .subscribe((data) => {
         this.questions = data.results;
-        this.countAllQuestions = this.questions.length;
+        this.countAllQuestions = this.questions.length; // save count question before shift in nextQuestion()
         this.quizzStartedAt = new Date();
         this.nextQuestion();
     });
@@ -38,7 +38,7 @@ export class QuestionComponent implements OnInit {
   }
 
   nextQuestion() {
-    this.currentQuestion = this.questions.shift();
+    this.currentQuestion = this.questions.shift(); // generate one question one by page
     if (this.currentQuestion === undefined) {
         this.calculeTimeQuizz();
         this.quizzPartieFinished.emit(true);
