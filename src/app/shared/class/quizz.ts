@@ -1,6 +1,6 @@
 export default class Quizz {
     private _nickname: string;
-    private _avatar: string;
+    private _avatar_url: string;
     private _score = 0;
     private _time = 0;
 
@@ -12,12 +12,12 @@ export default class Quizz {
         this._nickname = value;
     }
 
-    get avatar(): string {
-        return this._avatar;
+    get avatar_url(): string {
+        return this._avatar_url;
     }
 
-    set avatar(value: string) {
-        this._avatar = value;
+    set avatar_url(value: string) {
+        this._avatar_url = value;
     }
 
     get score(): number {

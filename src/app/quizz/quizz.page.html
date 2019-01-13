@@ -2,7 +2,7 @@
     <ion-toolbar>
         <div class="toolbar">
             <div class="toolbar-user">
-                <img *ngIf="user?.avatar" src="{{user.avatar}}" height="60"/>
+                <img *ngIf="user?.avatar_url" src="{{user.avatar_url}}" height="60"/>
                 <p *ngIf="user?.nickname">{{user.nickname}}</p>
             </div>
             <ion-button (click)="logout()">exit</ion-button>
@@ -30,7 +30,7 @@
        <p>the game is finished your score is:</p>
        <p>{{quizzPartie.score}}</p>
         <div class="button-finished-game">
-            <ion-button>share your score</ion-button>
+            <ion-button (click)="shareQuizz()">share your score</ion-button>
             <ion-button (click)="quitQuizz()">quit</ion-button>
         </div>
     </div>

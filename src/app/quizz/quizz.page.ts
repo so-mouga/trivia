@@ -4,6 +4,7 @@ import {AlertController, NavController} from '@ionic/angular';
 import User from '../user/user.interface';
 import Difficulty from './difficulty/difficulty.interface';
 import Quizz from '../shared/class/quizz';
+import {QuizzService} from '../shared/providers/quizz/quizz.service';
 
 
 @Component({
@@ -18,13 +19,16 @@ export class QuizzPage implements OnInit {
   quizzPartie = new Quizz();
   partieFinished = false;
 
-  constructor(private userProvider: UserService, private alertCtrl: AlertController, private navController: NavController) {
+  constructor(private userProvider: UserService,
+              private alertCtrl: AlertController,
+              private navController: NavController,
+              private quizzService: QuizzService) {
     this.userProvider.getUser<User>().then((user) => {
         if (null === user) {
             this.navController.navigateRoot(['/home']);
         }
         this.user = user;
-        this.quizzPartie.avatar = this.user.avatar;
+        this.quizzPartie.avatar_url = this.user.avatar_url;
         this.quizzPartie.nickname = this.user.nickname;
     });
   }
@@ -42,7 +46,31 @@ export class QuizzPage implements OnInit {
 
   quitQuizz() {
     this.navController.navigateRoot(['/home']);
-    // location.reload();
+  }
+
+  shareQuizz() {
+      this.quizzService
+          .shareQuizz(this.quizzPartie)
+          .then(() => {
+              const alert = this.alertCtrl.create({
+                  message: 'your score is shared',
+                  buttons: [
+                      {
+                          text: 'Exit',
+                          handler: () => {
+                              this.navController.navigateRoot(['/home']);
+                          }
+                      },
+                      {
+                          text: 'Look the dashboard',
+                          handler: () => {
+                              console.log('okok');
+                          }
+                      }
+                  ]
+              });
+              alert.then((p) => p.present());
+          });
   }
 
   logout() {

@@ -14,7 +14,7 @@ const apiAdorableAvatar = 'https://api.adorable.io/avatars/';
 export class LoginPage implements OnInit {
   user: User = {
     nickname: null,
-    avatar: null
+    avatar_url: null
   };
 
   constructor(private userProvider: UserService, private router: Router) {
@@ -31,12 +31,12 @@ export class LoginPage implements OnInit {
 
   generateUser(): void {
     if (null !== this.user.nickname) {
-        this.user.avatar = this.userProvider.generateAvatar();
+        this.user.avatar_url = this.userProvider.generateAvatar();
     }
   }
 
   public startGame(): void {
-    if (null !== this.user.nickname && null !== this.user.avatar) {
+    if (null !== this.user.nickname && null !== this.user.avatar_url) {
       this.userProvider.saveUser<User>(this.user)
         .then(() => this.router.navigate(['/quizz']));
     }

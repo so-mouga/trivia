@@ -11,7 +11,7 @@ export class OpentdbService {
 
   constructor(private httpService: HttpService) { }
 
-  getQuestions<T>(amout: string = '4', difficulty: string = 'easy', category: string = ''): Observable<T> {
+  getQuestions<T>(amout: string = '1', difficulty: string = 'easy', category: string = ''): Observable<T> {
       return this
           .httpService
           .get<any>(`${urlAPI}?amount=${amout}&difficulty=${difficulty}&category=${category}`)

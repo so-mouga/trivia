@@ -1,4 +1,4 @@
 export default interface User {
     nickname: string;
-    avatar: string;
+    avatar_url: string;
 }
