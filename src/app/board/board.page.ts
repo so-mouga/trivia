@@ -14,7 +14,12 @@ export class BoardPage implements OnInit {
     this
       .quizzService
       .getScoresUsers()
-      .subscribe((users) => this.users = users);
+      .subscribe((users) => {
+          this.users = users;
+          this.users.sort(function(a, b) {
+              return b.score - a.score;
+          });
+      });
   }
 
   ngOnInit() {
