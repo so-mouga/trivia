@@ -5,16 +5,6 @@ export class Question {
     private _incorrect_answers: Array<string>;
     private _question: string;
     private _type: string;
-    private _all_answers: Array<string>;
-
-
-    set all_answers(value: Array<string>) {
-        this._all_answers = value;
-    }
-
-    get all_answers(): Array<string> {
-        return  this._all_answers;
-    }
 
     get category(): string {
         return this._category;
@@ -62,5 +52,9 @@ export class Question {
 
     set type(value: string) {
         this._type = value;
+    }
+
+    all_answers() {
+        return this._incorrect_answers.concat(this._correct_answer);
     }
 }
