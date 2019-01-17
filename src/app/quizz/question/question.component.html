@@ -1,7 +1,7 @@
 <ion-grid *ngIf="currentQuestion?.question">
     <p align="center">Question : {{countAllQuestions - questions.length}}/{{countAllQuestions}}</p>
     <p>{{currentQuestion.question}}</p>
-    <ion-row *ngFor="let answer of currentQuestion.all_answers">
+    <ion-row *ngFor="let answer of currentQuestion.all_answers()">
         <ion-col>
             <ion-button
                     color="light"

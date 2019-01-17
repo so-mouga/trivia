@@ -5,6 +5,7 @@ import {Lp1Interface} from '../../clients/lp1/lp1.interface';
 import {Observable} from 'rxjs';
 import {OpentdbService} from '../../clients/opentdb/opentdb.service';
 import {QuestionOpentdbInterface} from '../../clients/opentdb/questionOpentdb.interface';
+import { Question } from '../../class/question';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class QuizzService {
     return this.lp1Service.getScoresUsers();
   }
 
-  getQuestions(): Observable<QuestionOpentdbInterface> {
+  getQuestions(): Observable<Question[]> {
     return this
       .opentdb.getQuestions();
   }

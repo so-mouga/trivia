@@ -27,7 +27,7 @@ export class QuestionComponent implements OnInit {
       .quizzService
       .getQuestions()
       .subscribe((data) => {
-        this.questions = data.results;
+        this.questions = data;
         this.countAllQuestions = this.questions.length; // save count question before shift in nextQuestion()
         this.quizzStartedAt = new Date();
         this.nextQuestion();
@@ -67,9 +67,7 @@ export class QuestionComponent implements OnInit {
   }
 
   generateRandomAnswers() {
-    this.currentQuestion.all_answers = this.currentQuestion.incorrect_answers;
-    this.currentQuestion.all_answers.push(this.currentQuestion.correct_answer);
-    this.shuffle(this.currentQuestion.all_answers);
+    this.shuffle(this.currentQuestion.all_answers());
   }
 
   shuffle(a) {
